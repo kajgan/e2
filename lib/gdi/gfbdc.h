@@ -8,7 +8,7 @@
 class gFBDC: public gMainDC
 {
 	fbClass *fb;
-	int brightness, gamma, alpha;
+	int brightness, gamma, alpha, speed;
 	gUnmanagedSurface surface;
 	gUnmanagedSurface surface_back;
 	unsigned char ramp[256], rampalpha[256]; // RGB ramp 0..255
@@ -18,6 +18,8 @@ class gFBDC: public gMainDC
 public:
 	void setResolution(int xres, int yres, int bpp = 32);
 	void reloadSettings();
+	void setAnimation_current(int alpha);
+	void setAnimation_speed(int speed);
 	void setAlpha(int alpha);
 	void setBrightness(int brightness);
 	void setGamma(int gamma);

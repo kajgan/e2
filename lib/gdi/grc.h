@@ -64,6 +64,9 @@ struct gOpcode
 		shutdown,
 
 		setCompositing,
+		
+		sendShow,
+		sendHide,
 	} opcode;
 
 	gDC *dc;
@@ -266,7 +269,7 @@ public:
 	void resetClip(const gRegion &clip);
 	void clip(const gRegion &clip);
 	void clippop();
-
+	
 	void waitVSync();
 	void flip();
 	void notify();
