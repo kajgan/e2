@@ -113,14 +113,3 @@ int eWindow::event(int event, void *data, void *data2)
 	}
 	return eWidget::event(event, data, data2);
 }
-void eWindow::show()
-{
-		m_desktop->sendShow(position(), size());
-	eWidget::show();
-}
-
-void eWindow::hide()
-{
-		m_desktop->sendHide(position(), size());
-	eWidget::hide();
-}
