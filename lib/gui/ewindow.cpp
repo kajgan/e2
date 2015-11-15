@@ -126,15 +126,3 @@ void eWindow::hide()
 		m_desktop->sendHide(position(), size());
 	eWidget::hide();
 }
-
-void eWindow::setAnimationMode(int mode)
-{
-	/*
-	 * 0x00 = animation off
-	 * 0x01 = show on
-	 * 0x10 = hide on
-	 * 0x11 = animation on
-	 */
-	m_animation_mode = mode;
-}
-
