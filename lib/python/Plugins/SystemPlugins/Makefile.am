@@ -7,5 +7,6 @@ SUBDIRS = SoftwareManager PositionerSetup Satfinder \
 	VideoEnhancement WirelessLan NetworkWizard DeviceManager \
 	SwapManager AnimationSetup
 
+	
 install_PYTHON =	\
 	__init__.py
