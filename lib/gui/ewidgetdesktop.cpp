@@ -535,3 +535,20 @@ eRect eWidgetDesktop::bounds() const
 			size.height() - m_margins.top() - m_margins.bottom() // height
 		);
 }
+
+void eWidgetDesktop::sendShow(ePoint point, eSize size) {
+	if(m_style_id!=0)
+		return;
+
+	gPainter painter(m_screen.m_dc);
+	painter.sendShow(point, size);
+}
+
+void eWidgetDesktop::sendHide(ePoint point, eSize size)
+{
+	if(m_style_id!=0)
+		return;
+
+	gPainter painter(m_screen.m_dc);
+	painter.sendHide(point, size);
+}	

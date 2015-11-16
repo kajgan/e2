@@ -64,7 +64,6 @@ struct gOpcode
 		shutdown,
 
 		setCompositing,
-		
 		sendShow,
 		sendHide,
 	} opcode;
@@ -147,6 +146,11 @@ struct gOpcode
 		} *setOffset;
 
 		gCompositingData *setCompositing;
+		
+		struct psetShowHideInfo {
+			ePoint point;
+			eSize size;
+		} *setShowHideInfo; 
 	} parm;
 };
 
@@ -269,13 +273,15 @@ public:
 	void resetClip(const gRegion &clip);
 	void clip(const gRegion &clip);
 	void clippop();
-	
+
 	void waitVSync();
 	void flip();
 	void notify();
 	void setCompositing(gCompositingData *comp);
 
 	void flush();
+	void sendShow(ePoint point, eSize size);
+	void sendHide(ePoint point, eSize size); 
 };
 
 class gDC: public iObject

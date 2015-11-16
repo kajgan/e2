@@ -1,10 +1,11 @@
 installdir = $(pkglibdir)/python/Plugins/SystemPlugins
 
-SUBDIRS = AnimationSetup SoftwareManager PositionerSetup Satfinder \
+SUBDIRS = SoftwareManager PositionerSetup Satfinder \
 	SkinSelector SatelliteEquipmentControl Videomode VideoTune Hotplug \
 	DefaultServicesScanner DiseqcTester CommonInterfaceAssignment \
 	CableScan FastScan OSDPositionSetup OSD3DSetup HdmiCEC VideoClippingSetup \
-	VideoEnhancement WirelessLan NetworkWizard DeviceManager SwapManager
+	VideoEnhancement WirelessLan NetworkWizard DeviceManager \
+	SwapManager AnimationSetup
 
 install_PYTHON =	\
 	__init__.py

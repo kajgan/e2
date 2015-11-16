@@ -6,10 +6,10 @@
 #include <lib/gdi/accel.h>
 
 #include <time.h>
+#include <lib/base/cfile.h> 
 
-#include <lib/base/cfile.h>
-
-gFBDC::gFBDC() {
+gFBDC::gFBDC()
+{
 	fb=new fbClass;
 
 	if (!fb->Available())
@@ -33,12 +33,14 @@ gFBDC::gFBDC() {
 	reloadSettings();
 }
 
-gFBDC::~gFBDC() {
+gFBDC::~gFBDC()
+{
 	delete fb;
 	delete[] surface.clut.data;
 }
 
-void gFBDC::calcRamp() {
+void gFBDC::calcRamp()
+{
 #if 0
 	float fgamma=gamma ? gamma : 1;
 	fgamma/=10.0;
@@ -46,12 +48,14 @@ void gFBDC::calcRamp() {
 	for (int i=0; i<256; i++) {
 		float raw=i/255.0; // IIH, float.
 		float corr=pow(raw, fgamma) * 256.0;
+
 		int d=corr * (float)(256-brightness) / 256 + brightness;
 		if (d < 0)
 			d=0;
 		if (d > 255)
 			d=255;
 		ramp[i]=d;
+
 		rampalpha[i]=i*alpha/256;
 	}
 #endif
@@ -72,7 +76,8 @@ void gFBDC::calcRamp() {
 	rampalpha[255]=255; // transparent BLEIBT bitte so.
 }
 
-void gFBDC::setPalette() {
+void gFBDC::setPalette()
+{
 	if (!surface.clut.data)
 		return;
 
@@ -85,22 +90,14 @@ void gFBDC::setPalette() {
 	fb->PutCMAP();
 }
 
-void gFBDC::exec(const gOpcode *o) {
+void gFBDC::exec(const gOpcode *o)
+{
 	switch (o->opcode) 	{
-		case gOpcode::sendShow: {
-			CFile::writeInt("/proc/stb/fb/animation_mode", 1);			
-			break;
-		}
-		case gOpcode::sendHide: {
-			CFile::writeInt("/proc/stb/fb/animation_mode", 10);			
-			break;
-		}
-		case gOpcode::setPalette: {
+		case gOpcode::setPalette: 
 			gDC::exec(o);
 			setPalette();
 			break;
-		}
-		case gOpcode::flip: {
+		case gOpcode::flip: 
 			if (surface_back.data_phys) {
 				gUnmanagedSurface s(surface);
 				surface = surface_back;
@@ -112,13 +109,12 @@ void gFBDC::exec(const gOpcode *o) {
 					fb->setOffset(0);
 			}
 			break;
-		}
-		case gOpcode::waitVSync: {
+		case gOpcode::waitVSync:
 			static timeval l;
 			static int t;
 			timeval now;
 
-			if (t == 1000)	{
+			if (t == 1000) {
 				gettimeofday(&now, 0);
 
 				int diff = (now.tv_sec - l.tv_sec) * 1000 + (now.tv_usec - l.tv_usec) / 1000;
@@ -132,24 +128,19 @@ void gFBDC::exec(const gOpcode *o) {
 			fb->blit();
 			fb->waitVSync();
 			break;
-		}
-		case gOpcode::flush: {
+		case gOpcode::flush:
 			fb->blit();
 			break;
-		}
-		default: {
+		case gOpcode::sendShow:	
+			CFile::writeInt("/proc/stb/fb/animation_mode", 1);
+			break;
+		case gOpcode::sendHide: 
+			CFile::writeInt("/proc/stb/fb/animation_mode", 10);
+			break;
+		default:
 			gDC::exec(o);
 			break;
-		}
 	}
-}
-
-void gFBDC::setAnimation_current(int a) {
-	CFile::writeInt("/proc/stb/fb/animation_current", a);
-}
-
-void gFBDC::setAnimation_speed(int speed) {
-	CFile::writeInt("/proc/stb/fb/animation_speed", speed);
 }
 
 void gFBDC::setAlpha(int a) {
