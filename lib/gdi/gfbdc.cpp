@@ -132,10 +132,10 @@ void gFBDC::exec(const gOpcode *o)
 			fb->blit();
 			break;
 		case gOpcode::sendShow:	
-			CFile::writeInt("/proc/stb/fb/animation_mode", 1);
+			CFile::writeIntHex("/proc/stb/fb/animation_mode", 0x01);
 			break;
 		case gOpcode::sendHide: 
-			CFile::writeInt("/proc/stb/fb/animation_mode", 10);
+			CFile::writeIntHex("/proc/stb/fb/animation_mode", 0x10);
 			break;
 		default:
 			gDC::exec(o);
