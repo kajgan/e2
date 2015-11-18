@@ -414,7 +414,7 @@ void setAnimation_current(int a) {
 			break;
 		case 7: 
 			CFile::writeStr("/proc/stb/fb/animation_current", "slidefromleft");
-			break
+			break;
 		case 8: 
 			CFile::writeStr("/proc/stb/fb/animation_current", "slidelefttoright");
 			break;
