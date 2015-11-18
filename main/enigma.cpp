@@ -402,22 +402,37 @@ void setAnimation_current(int a) {
 			break;
 		case 3: 
 			CFile::writeStr("/proc/stb/fb/animation_current", "growfromleft");
-			break;			
+			break;	
 		case 4: 
+			CFile::writeStr("/proc/stb/fb/animation_current", "extrudefromleft");
+			break;	
+		case 5: 
 			CFile::writeStr("/proc/stb/fb/animation_current", "popup");
 			break;		
-		case 5: 
+		case 6: 
 			CFile::writeStr("/proc/stb/fb/animation_current", "slidedrop");
 			break;
-		case 6: 
+		case 7: 
+			CFile::writeStr("/proc/stb/fb/animation_current", "slidefromleft");
+			break
+		case 8: 
 			CFile::writeStr("/proc/stb/fb/animation_current", "slidelefttoright");
 			break;
-		case 7: 
+		case 9: 
+			CFile::writeStr("/proc/stb/fb/animation_current", "sliderighttoleft");
+			break;
+		case 10: 
 			CFile::writeStr("/proc/stb/fb/animation_current", "slidetoptobottom");
 			break;
-		case 8: 
+		case 11: 
+			CFile::writeStr("/proc/stb/fb/animation_current", "zoomfromleft");
+			break;	
+		case 12: 
+			CFile::writeStr("/proc/stb/fb/animation_current", "zoomfromright");
+			break;
+		case 13: 
 			CFile::writeStr("/proc/stb/fb/animation_current", "stripes");
-			break;			
+			break;
 		default: 
 			CFile::writeStr("/proc/stb/fb/animation_current", "disable");
 			break;
